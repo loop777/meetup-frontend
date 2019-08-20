@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import { Link } from 'react-router-dom';
 
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
+
+import api from '~/services/api';
 
 import { Container, Meetup } from './styles';
 
 export default function Dashboard() {
+  const [meetups, setMeetups] = useState([]);
+
+  useEffect(() => {
+    async function loadMeetups() {
+      const response = await api.get('organizing');
+      const data = response.data.map(meetup => ({
+        ...meetup,
+        formatedDate: format(
+          parseISO(meetup.date),
+          "d 'de' MMMM', às 'HH:mm'h'",
+          {
+            locale: pt,
+          }
+        ),
+      }));
+
+      setMeetups(data);
+    }
+
+    loadMeetups();
+  }, []);
+
   return (
     <Container>
       <nav>
@@ -16,27 +43,17 @@ export default function Dashboard() {
       </nav>
 
       <ul>
-        <Meetup>
-          <strong>Meetup do React Native</strong>
-          <aside>
-            <span>18 de Agosto, às 20h</span>
-            <MdChevronRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
-        <Meetup>
-          <strong>Meetup do React Native</strong>
-          <aside>
-            <span>18 de Agosto, às 20h</span>
-            <MdChevronRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
-        <Meetup>
-          <strong>Meetup do React Native</strong>
-          <aside>
-            <span>18 de Agosto, às 20h</span>
-            <MdChevronRight size={24} color="#fff" />
-          </aside>
-        </Meetup>
+        {meetups.map(meetup => (
+          <Link to={`/details/${meetup.id}`}>
+            <Meetup>
+              <strong>{meetup.title}</strong>
+              <aside>
+                <span>{meetup.formatedDate}</span>
+                <MdChevronRight size={24} color="#fff" />
+              </aside>
+            </Meetup>
+          </Link>
+        ))}
       </ul>
     </Container>
   );
