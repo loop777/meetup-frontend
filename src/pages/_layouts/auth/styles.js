@@ -35,6 +35,12 @@ export const Content = styled.div`
       }
     }
 
+    span {
+      color: #fff;
+      font-weight: bold;
+      margin: 0 0 10px;
+    }
+
     button {
       background: #f94d6a;
       height: 50px;
