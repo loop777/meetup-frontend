@@ -47,9 +47,7 @@ export const Meetup = styled.li`
   border-radius: 4px;
   padding: 20px 30px;
 
-  & + li {
-    margin-top: 10px;
-  }
+  margin-bottom: 10px;
 
   strong {
     color: #fff;
