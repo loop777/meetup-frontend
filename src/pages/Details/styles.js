@@ -51,7 +51,9 @@ export const Container = styled.div`
 
 export const Meetup = styled.section`
   img {
-    margin-bottom: 25px;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto 25px;
   }
 
   p {
