@@ -16,14 +16,11 @@ export const Container = styled.div`
       font-size: 18px;
       color: rgba(255, 255, 255, 0.5);
       padding: 0 20px;
+      margin-bottom: 10px;
 
       &::placeholder {
         font-size: 18px;
         color: rgba(255, 255, 255, 0.5);
-      }
-
-      & + input {
-        margin-top: 10px;
       }
     }
 
@@ -36,7 +33,7 @@ export const Container = styled.div`
       font-size: 18px;
       color: rgba(255, 255, 255, 0.5);
       padding: 20px;
-      margin: 10px 0;
+      margin-bottom: 10px;
       font-family: 'Helvetica', sans-serif;
 
       &::placeholder {
@@ -45,8 +42,14 @@ export const Container = styled.div`
       }
     }
 
-    div {
-      margin-top: 20px;
+    span {
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    div#btn {
+      margin-top: 10px;
       display: flex;
       justify-content: flex-end;
       button {

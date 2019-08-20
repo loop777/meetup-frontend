@@ -22,6 +22,11 @@ export const Container = styled.div`
       color: rgba(255, 255, 255, 0.3);
     }
 
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
     input {
       display: none;
     }

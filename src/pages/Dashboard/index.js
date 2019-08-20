@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import { Container, Meetup } from './styles';
 
@@ -36,7 +37,7 @@ export default function Dashboard() {
     <Container>
       <nav>
         <h1>Meus meetups</h1>
-        <button type="button">
+        <button type="button" onClick={() => history.push('/meetup')}>
           <MdAddCircleOutline size={20} color="#fff" />
           <span>Novo meetup</span>
         </button>
