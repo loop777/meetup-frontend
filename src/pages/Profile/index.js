@@ -12,12 +12,10 @@ import { Container } from './styles';
 const schema = Yup.object().shape({
   name: Yup.string(),
   email: Yup.string().email(),
-  oldPassword: Yup.string().min(6),
-  password: Yup.string()
-    .min(6)
-    .when('oldPassword', (oldPassword, field) =>
-      oldPassword ? field.required() : field
-    ),
+  oldPassword: Yup.string(),
+  password: Yup.string().when('oldPassword', (oldPassword, field) =>
+    oldPassword ? field.min(6).required() : field
+  ),
   repeatPassword: Yup.string().when('password', (password, field) =>
     password ? field.required().oneOf([Yup.ref('password')]) : field
   ),
