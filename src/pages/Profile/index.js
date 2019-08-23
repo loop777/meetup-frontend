@@ -1,12 +1,27 @@
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
 
 import { MdAddCircleOutline } from 'react-icons/md';
 
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import { Container } from './styles';
+
+const schema = Yup.object().shape({
+  name: Yup.string(),
+  email: Yup.string().email(),
+  oldPassword: Yup.string().min(6),
+  password: Yup.string()
+    .min(6)
+    .when('oldPassword', (oldPassword, field) =>
+      oldPassword ? field.required() : field
+    ),
+  repeatPassword: Yup.string().when('password', (password, field) =>
+    password ? field.required().oneOf([Yup.ref('password')]) : field
+  ),
+});
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -18,7 +33,7 @@ export default function Profile() {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit} initialData={profile}>
+      <Form onSubmit={handleSubmit} initialData={profile} schema={schema}>
         <Input name="name" placeholder="Nome completo" />
         <Input type="email" name="email" placeholder="Seu endereço de email" />
         <hr />
